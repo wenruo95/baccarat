@@ -149,4 +149,47 @@ func (this *Collections) finished() {
 		}
 		log.Printf("%s", info)
 	}
+
+	this.Paint(this.results)
+}
+
+// o x =
+// 0A胜利 1B胜利 2和
+// 5行
+func (this *Collections) Paint(data []int) {
+	// 02d %02d
+	max := 0
+	lastvalid := -1
+	rows := make([]int, 0)
+	info := make([][]int, 0)
+	for _, v := range data {
+		if lastvalid == -1 || lastvalid == v || v == RESULT_PEACE {
+			rows = append(rows, v)
+		} else {
+			info = append(info, rows)
+			rows = []int{v}
+		}
+		if v != 2 {
+			lastvalid = v
+		}
+		if len(rows) > max {
+			max = len(rows)
+		}
+	}
+	for i := 0; i < max; i++ {
+		for _, row := range info {
+			if i < len(row) {
+				str := "X"
+				if row[i] == RESULT_PLAYER_WIN {
+					str = "O"
+				} else if row[i] == RESULT_PEACE {
+					str = "="
+				}
+				fmt.Printf("%s   ", str)
+			} else {
+				fmt.Printf("    ")
+			}
+		}
+		fmt.Println()
+	}
 }
