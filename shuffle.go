@@ -41,7 +41,7 @@ func CardToPoint(card int32) int32 {
 }
 
 // 0~12
-func CalculateCards(cards []int32) (int32, bool) {
+func CalculateCardsAndPair(cards []int32) (int32, bool) {
 	sum, pair := int32(0), false
 	mp := make(map[int32]bool)
 	for _, card := range cards {
@@ -54,4 +54,12 @@ func CalculateCards(cards []int32) (int32, bool) {
 		}
 	}
 	return sum % 10, pair
+}
+
+func CalculateCards(cards []int32) int32 {
+	sum := int32(0)
+	for _, card := range cards {
+		sum = sum + CardToPoint(card)
+	}
+	return sum % 10
 }
