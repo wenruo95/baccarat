@@ -1,4 +1,4 @@
-package main
+package service
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 const (
 	CARD_NUM            = 52 // 一副牌多少牌 没有大小王
 	CARD_COLLECTION_NUM = 8  // 多少副牌
-	DEFAULT_PLAY_CNT    = 55 // 默认回合数 (52 * 8) / 6 =
+	DEFAULT_PLAY_CNT    = 55 // 默认回合数 (52 * 8) / 6 = 69
 	RESULT_BANKER_WIN   = 0
 	RESULT_PLAYER_WIN   = 1
 	RESULT_PEACE        = 2
@@ -114,7 +114,7 @@ func (this *Collections) dealCards() ([]int32, []int32) {
 			playerCards = append(playerCards, this.getANewCard())
 		}
 	case 5:
-		if lastCard != 0 && lastCard != 1 && lastCard != 2 && lastCard != 3 && lastCard != 9 && lastCard != 9 {
+		if lastCard != 0 && lastCard != 1 && lastCard != 2 && lastCard != 3 && lastCard != 8 && lastCard != 9 {
 			playerCards = append(playerCards, this.getANewCard())
 		}
 	case 6, 7, 8, 9:
