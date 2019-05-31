@@ -30,3 +30,28 @@ func KnuthDurstenfeld(arrs []int32) []int32 {
 	}
 	return arrs
 }
+
+// 0 ~ 8
+func CardToPoint(card int32) int32 {
+	card = card % 13
+	if card > 8 {
+		return 0
+	}
+	return card + 1
+}
+
+// 0~12
+func CalculateCards(cards []int32) (int32, bool) {
+	sum, pair := int32(0), false
+	mp := make(map[int32]bool)
+	for _, card := range cards {
+		validCard := card % 13
+		sum = sum + CardToPoint(validCard)
+		if _, ok := mp[validCard]; ok {
+			pair = true
+		} else {
+			mp[validCard] = true
+		}
+	}
+	return sum % 10, pair
+}
