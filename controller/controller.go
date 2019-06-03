@@ -18,13 +18,12 @@ func NewController() *Controller {
 }
 
 func (this *Controller) Serve() {
-	for i := 0; i < 1; i++ {
-		log.Printf("start new collections")
+	for i := 0; i < 10000; i++ {
 		collection := service.NewCollections(service.DEFAULT_PLAY_CNT)
 		collection.Run()
-		log.Printf("end a collections")
+		collection.PrintPaint()
+		fmt.Println()
 	}
-
 	//this.signHandle()
 }
 

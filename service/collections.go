@@ -72,7 +72,6 @@ func (this *Collections) Run() {
 		}
 		this.results = append(this.results, result)
 	}
-	this.finished()
 }
 
 func (this *Collections) getANewCard() int32 {
@@ -131,7 +130,7 @@ func (this *Collections) dealCards() ([]int32, []int32) {
 	return bankerCards, playerCards
 }
 
-func (this *Collections) finished() {
+func (this *Collections) PrintResult() {
 	log.Printf("result:%v bank11:%v play11:%v", len(this.results), len(this.banker11), len(this.player11))
 	for i := 0; i < this.maxCnt; i++ {
 		result := "庄赢"
@@ -149,20 +148,14 @@ func (this *Collections) finished() {
 		}
 		log.Printf("%s", info)
 	}
-
-	this.Paint(this.results)
 }
 
-// o x =
-// 0A胜利 1B胜利 2和
-// 5行
-func (this *Collections) Paint(data []int) {
-	// 02d %02d
-	max := 0
-	lastvalid := -1
+func (this *Collections) PrintPaint() {
+	split := "   "
+	max, lastvalid := 0, -1
 	rows := make([]int, 0)
 	info := make([][]int, 0)
-	for _, v := range data {
+	for _, v := range this.results {
 		if lastvalid == -1 || lastvalid == v || v == RESULT_PEACE {
 			rows = append(rows, v)
 		} else {
@@ -185,9 +178,9 @@ func (this *Collections) Paint(data []int) {
 				} else if row[i] == RESULT_PEACE {
 					str = "="
 				}
-				fmt.Printf("%s   ", str)
+				fmt.Printf("%s%s", str, split)
 			} else {
-				fmt.Printf("    ")
+				fmt.Printf(" %s", split)
 			}
 		}
 		fmt.Println()
